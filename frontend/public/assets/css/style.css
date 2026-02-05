@@ -3821,7 +3821,7 @@ select.form-control-sm:not([size]):not([multiple]) {
 }
 
 .breadcrumb-bar {
-  padding: 40px 0;
+  padding: 150px 0;
   background: var(--dark);
   position: relative;
   overflow: hidden;

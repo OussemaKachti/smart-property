@@ -255,19 +255,7 @@ const Header = () => {
                 </div>
               </div>
 
-              <div className="dropdown">
-                <a href="#" className="topbar-link btn btn-light" data-bs-toggle="dropdown">
-                  <i className="material-icons-outlined">wb_sunny</i>
-                </a>
-                <div className="dropdown-menu dropdown-menu-end">
-                  <a href="#" className="dropdown-item d-flex align-items-center" id="light-mode-toggle">
-                    <i className="material-icons-outlined me-2">wb_sunny</i> <span className="align-middle">{t('common.lightMode')}</span>
-                  </a>
-                  <a href="#" className="dropdown-item d-flex align-items-center" id="dark-mode-toggle">
-                    <i className="material-icons-outlined me-2">dark_mode</i> <span className="align-middle">{t('common.darkMode')}</span>
-                  </a>
-                </div>
-              </div>
+            
 
               <Link to="/login" className="btn btn-lg btn-primary d-inline-flex align-items-center">
                 <i className="material-icons-outlined me-1">lock</i>{t('common.signIn')}
