@@ -123,43 +123,7 @@ const Index3 = () => {
 							</div>
 						</div> 
 
-						<div className="col-xxl-4 col-lg-5">
-							<div className="banner-right-content">
-								<div className="banner-card">
-									<div className="me-3 card-img">
-										<Link to="/buy-details"><img src="/assets/img/home-3/banner-01.png" className="rounded" alt="" /></Link>
-									</div>
-									<div>
-										<h6 className="text-white"><Link to="/buy-details" className="text-white">{t('banner.beautifulCondo')}</Link></h6>
-										<span className="text-white mb-1 d-block">{t('banner.apartmentName')}</span>
-										<p className="rate-info mb-3"><span>$400 </span> {t('banner.priceMonth')}</p>
-										<div className="d-flex align-items-center card-info">
-											<p className="me-3"><span className="me-2"><i className="material-icons-outlined">bed</i></span>2 {t('banner.bedroom')}</p>
-											<p><span className="me-2"><i className="material-icons-outlined">bathtub</i></span>2 {t('banner.bath')}</p>
-										</div>
-									</div>
-								</div>
-								<div className="banner-users d-flex align-items-center flex-wrap gap-2 mb-3">
-									<div className="avatar-list-stacked"> 
-										<span className="avatar avatar-md rounded-circle border-0"><img src="/assets/img/users/user-01.jpg" className="img-fluid rounded-circle" alt="Img" /></span>
-										<span className="avatar avatar-md rounded-circle border-0"><img src="/assets/img/users/user-02.jpg" className="img-fluid rounded-circle" alt="Img" /></span>
-										<span className="avatar avatar-md rounded-circle border-0"><img src="/assets/img/users/user-03.jpg" className="img-fluid rounded-circle" alt="Img" /></span>
-										<span className="avatar avatar-md rounded-circle border-0"><img src="/assets/img/users/user-04.jpg" className="img-fluid rounded-circle" alt="Img" /></span>
-									</div>
-									<div>
-										<div className="d-flex align-items-center mb-1">
-											<h6 className="mb-0 me-2 text-white fw-semibold fs-14">{t('banner.ratings')}</h6>
-											<i className="material-icons-outlined text-warning">star</i>
-											<i className="material-icons-outlined text-warning">star</i>
-											<i className="material-icons-outlined text-warning">star</i>
-											<i className="material-icons-outlined text-warning">star</i>
-											<i className="material-icons-outlined text-warning">star</i>
-										</div>
-										<p className="mb-0 text-white fs-13">{t('banner.trustedText')}</p>
-									</div>
-								</div>
-							</div>
-						</div> 
+						
 
 					</div>
 					

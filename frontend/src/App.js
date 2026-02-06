@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import './i18n';
@@ -59,7 +59,6 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import AddPropertyBuy from "./pages/AddPropertyBuy";
 import AddPropertyRent from "./pages/AddPropertyRent";
-import Index from "./pages/Index";
 import Index2 from "./pages/Index2";
 import Index3 from "./features/Index3/Index3";
 import InvoiceDetails from "./pages/InvoiceDetails";
@@ -71,12 +70,11 @@ import RentalOrderConfirmation from "./pages/RentalOrderConfirmation";
 import RentalOrderDetails from "./pages/RentalOrderDetails";
 import RentalPayment from "./pages/RentalPayment";
 import Signin from "./pages/Signin";
-import SignupPage from "./pages/Signup";
+import FirstStepForm from "./features/multi-step-form/FirstStepForm"
 
 const LanguageDetector = () => {
   const { i18n } = useTranslation();
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const path = location.pathname;
@@ -98,17 +96,16 @@ const LanguageDetector = () => {
   return null;
 };
 
-// Layout wrapper component that conditionally shows header/footer
 const AppLayout = ({ children }) => {
   const location = useLocation();
   
-  // Define auth routes that shouldn't have header/footer
   const authRoutes = [
     '/login', '/fr/login',
     '/signup', '/fr/signup', 
     '/signin', '/fr/signin',
     '/forgot-password', '/fr/forgot-password',
-    '/reset-password', '/fr/reset-password'
+    '/reset-password', '/fr/reset-password',
+    '/form'
   ];
   
   const isAuthRoute = authRoutes.includes(location.pathname);
@@ -150,6 +147,7 @@ function App() {
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/form" element={<FirstStepForm />} />
         <Route path="/fr/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/fr/signup" element={<Signup />} />

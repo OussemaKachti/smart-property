@@ -37,7 +37,7 @@ export default function Login() {
     setIsLoading(true);
     setLoginError("");
 
-    navigate("/dashboard");
+    navigate("/form");
 
   };
 
