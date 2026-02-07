@@ -9,6 +9,7 @@ Backend API pour la plateforme SmartProperty - Gestion Immobilière Intelligente
 - ✅ Upload multiple d'images (Cloudinary)
 - ✅ Géolocalisation avec MongoDB Geospatial
 - ✅ Recherche et filtrage avancés
+- ✅ Traçabilité : Enregistrement de l'utilisateur créateur
 
 ### Module IA
 - 🤖 **Génération de descriptions** : 3 variantes avec tons personnalisables (professionnel, chaleureux, luxe)
@@ -51,6 +52,9 @@ CLOUDINARY_API_SECRET=votre_api_secret
 ## 🏃 Démarrage
 
 ```bash
+# Initialiser l'utilisateur statique (une seule fois)
+npm run init-user
+
 # Mode développement
 npm run dev
 

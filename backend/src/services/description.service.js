@@ -1,9 +1,10 @@
-const openaiService = require('./openai.service');
+const groqService = require('./groq.service'); // ← CHANGEMENT ICI
 const { PropertyType } = require('../models');
 
 /**
  * Service pour la génération automatique de descriptions attractives
  * Génère 3 variantes de descriptions avec différentes longueurs et tons
+ * MAINTENANT AVEC GROQ (100% GRATUIT) 🎉
  */
 
 const TONE_TEMPLATES = {
@@ -57,6 +58,7 @@ exports.generateDescriptions = async (property, tone = 'professional', length = 
       metadata: {
         tone,
         length,
+        model: 'llama-3.1-70b-versatile (Groq)', // ← AJOUTÉ
         generatedAt: new Date().toISOString(),
       },
     };
@@ -92,7 +94,8 @@ Instructions :
 Répondez uniquement avec la description, sans introduction ni conclusion.
 `;
 
-    const description = await openaiService.createChatCompletion(
+    // ← CHANGEMENT ICI : utiliser groqService au lieu d'openaiService
+    const description = await groqService.createChatCompletion(
       [
         { role: 'system', content: toneConfig.prefix },
         { role: 'user', content: prompt },
@@ -120,7 +123,8 @@ Original description:
 ${description}
 `;
 
-    const translation = await openaiService.createChatCompletion(
+    // ← CHANGEMENT ICI aussi
+    const translation = await groqService.createChatCompletion(
       [{ role: 'user', content: prompt }],
       {
         temperature: 0.3,

@@ -1,6 +1,6 @@
 const { Property } = require('../models');
 const { apiResponse } = require('../utils/apiResponse');
-const cloudinary = require('../config/cloudinary');
+// const cloudinary = require('../config/cloudinary'); // Temporairement désactivé
 
 // @desc    Get all properties
 // @route   GET /api/properties
@@ -37,7 +37,8 @@ exports.getAllProperties = async (req, res, next) => {
     const properties = await Property.find(filter)
       .limit(limit * 1)
       .skip(skip)
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .populate('createdBy', 'login email role firstName lastName'); // Peupler les infos user
 
     const count = await Property.countDocuments(filter);
 
@@ -59,7 +60,8 @@ exports.getAllProperties = async (req, res, next) => {
 // @access  Public
 exports.getPropertyById = async (req, res, next) => {
   try {
-    const property = await Property.findById(req.params.id);
+    const property = await Property.findById(req.params.id)
+      .populate('createdBy', 'login email role firstName lastName'); // Peupler les infos user
 
     if (!property) {
       return res.status(404).json(
@@ -85,6 +87,7 @@ exports.createProperty = async (req, res, next) => {
     const propertyData = {
       ...req.body,
       reference,
+      createdBy: req.user._id, // Capturer l'utilisateur connecté
     };
 
     // Handle image uploads if present
@@ -97,8 +100,17 @@ exports.createProperty = async (req, res, next) => {
 
     const property = await Property.create(propertyData);
 
+    // Ajouter manuellement les infos du user (car populate ne marche pas avec staticUser)
+    const propertyWithUser = property.toObject();
+    propertyWithUser.createdBy = {
+      _id: req.user._id,
+      login: req.user.login,
+      email: req.user.email,
+      role: req.user.role
+    };
+
     res.status(201).json(
-      apiResponse(true, 'Property created successfully', property)
+      apiResponse(true, 'Property created successfully', propertyWithUser)
     );
   } catch (error) {
     next(error);
@@ -154,14 +166,14 @@ exports.deleteProperty = async (req, res, next) => {
       );
     }
 
-    // Delete images from Cloudinary
-    if (property.images && property.images.length > 0) {
-      for (const image of property.images) {
-        if (image.publicId) {
-          await cloudinary.uploader.destroy(image.publicId);
-        }
-      }
-    }
+    // Delete images from Cloudinary (temporairement désactivé)
+    // if (property.images && property.images.length > 0) {
+    //   for (const image of property.images) {
+    //     if (image.publicId) {
+    //       await cloudinary.uploader.destroy(image.publicId);
+    //     }
+    //   }
+    // }
 
     await Property.findByIdAndDelete(req.params.id);
 
@@ -198,11 +210,11 @@ exports.deletePropertyImage = async (req, res, next) => {
       );
     }
 
-    // Delete from Cloudinary
-    const publicId = property.images[imageIndex].publicId;
-    if (publicId) {
-      await cloudinary.uploader.destroy(publicId);
-    }
+    // Delete from Cloudinary (temporairement désactivé)
+    // const publicId = property.images[imageIndex].publicId;
+    // if (publicId) {
+    //   await cloudinary.uploader.destroy(publicId);
+    // }
 
     // Remove from array
     property.images.splice(imageIndex, 1);

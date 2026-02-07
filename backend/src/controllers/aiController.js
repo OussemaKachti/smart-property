@@ -19,7 +19,7 @@ exports.generateDescription = async (req, res, next) => {
       );
     }
 
-    // Generate 3 description variants
+    // Generate 3 description variants (temporairement désactivé IA)
     const descriptions = await descriptionService.generateDescriptions(
       property,
       tone,
@@ -55,7 +55,7 @@ exports.analyzeImages = async (req, res, next) => {
       );
     }
 
-    // Analyze images with GPT-4 Vision
+    // Analyze images with GPT-4 Vision (temporairement désactivé)
     const detectedFeatures = await imageAnalysisService.analyzePropertyImages(
       property.images.map(img => img.url)
     );
@@ -88,7 +88,7 @@ exports.applyDetectedFeatures = async (req, res, next) => {
       );
     }
 
-    // Apply selected features to property
+    // Apply selected features to property (temporairement désactivé)
     if (features.rooms) property.rooms = features.rooms;
     if (features.surface) property.surface = features.surface;
     if (features.type) property.type = features.type;
